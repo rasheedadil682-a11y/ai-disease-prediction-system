@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const API_BASE = "http://127.0.0.1:5001";
+  const API_BASE = "https://ai-disease-prediction-system-production.up.railway.app";
   const API_URL = `${API_BASE}/predict`;
   const TIMEOUT_MS = 12000;
   const THEME_KEY = "nexus-predict-theme";
