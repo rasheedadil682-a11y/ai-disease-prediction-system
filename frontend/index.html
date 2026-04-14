@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Predict - Disease Prediction System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+  <div class="bg-orb orb-3" aria-hidden="true"></div>
+
+  <main class="container">
+    <header class="hero glass">
+      <div>
+        <p class="kicker">AI Clinical Intelligence</p>
+        <h1>Nexus Predict</h1>
+        <p class="subtitle">Portfolio-grade Heart & Diabetes risk screening with rich visual analytics.</p>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">Toggle Theme</button>
+    </header>
+
+    <div class="tabs glass">
+      <button class="tab active" data-tab="heart" type="button">Heart</button>
+      <button class="tab" data-tab="diabetes" type="button">Diabetes</button>
+    </div>
+
+    <section id="heart-panel" class="panel active">
+      <div class="app-grid">
+        <article class="card glass">
+          <h2>Heart Inputs</h2>
+          <form id="heart-form" class="form-grid">
+            <input name="age" type="number" placeholder="Age" required />
+            <select name="sex" required><option value="">Sex</option><option value="M">Male</option><option value="F">Female</option></select>
+            <select name="chest_pain_type" required><option value="">Chest Pain Type</option><option value="ATA">ATA</option><option value="NAP">NAP</option><option value="ASY">ASY</option><option value="TA">TA</option></select>
+            <input name="resting_bp" type="number" placeholder="Resting BP" required />
+            <input name="cholesterol" type="number" placeholder="Cholesterol" required />
+            <input name="fasting_bs" type="number" placeholder="Fasting BS (0/1)" min="0" max="1" required />
+            <select name="resting_ecg" required><option value="">Resting ECG</option><option value="Normal">Normal</option><option value="ST">ST</option><option value="LVH">LVH</option></select>
+            <input name="maxhr" type="number" placeholder="Max Heart Rate" required />
+            <select name="exercise_angina" required><option value="">Exercise Angina</option><option value="Y">Yes</option><option value="N">No</option></select>
+            <input name="oldpeak" type="number" step="0.1" placeholder="Oldpeak" required />
+            <select name="st_slope" required><option value="">ST Slope</option><option value="Up">Up</option><option value="Flat">Flat</option><option value="Down">Down</option></select>
+            <button class="submit-btn" type="submit">Predict Heart Risk</button>
+          </form>
+        </article>
+
+        <article class="card glass">
+          <h2>Result Dashboard</h2>
+          <div id="heart-result" class="result hidden"></div>
+          <div id="heart-metrics" class="metrics hidden"></div>
+          <div class="chart-wrap"><canvas id="heart-chart"></canvas></div>
+          <div id="heart-risk-factors" class="insights hidden"></div>
+          <div class="chart-wrap"><canvas id="heart-importance-chart"></canvas></div>
+          <div id="heart-insights" class="insights hidden"></div>
+          <div id="heart-diet" class="plan hidden"></div>
+          <div id="heart-exercise" class="plan hidden"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="diabetes-panel" class="panel">
+      <div class="app-grid">
+        <article class="card glass">
+          <h2>Diabetes Inputs</h2>
+          <form id="diabetes-form" class="form-grid">
+            <input name="pregnancies" type="number" placeholder="Pregnancies" required />
+            <input name="glucose" type="number" placeholder="Glucose" required />
+            <input name="bp" type="number" placeholder="Blood Pressure" required />
+            <input name="skin_thickness" type="number" placeholder="Skin Thickness" required />
+            <input name="insulin" type="number" placeholder="Insulin" required />
+            <input name="bmi" type="number" step="0.1" placeholder="BMI" required />
+            <input name="dpf" type="number" step="0.001" placeholder="Diabetes Pedigree Function" required />
+            <input name="age" type="number" placeholder="Age" required />
+            <button class="submit-btn" type="submit">Predict Diabetes Risk</button>
+          </form>
+        </article>
+
+        <article class="card glass">
+          <h2>Result Dashboard</h2>
+          <div id="diabetes-result" class="result hidden"></div>
+          <div id="diabetes-metrics" class="metrics hidden"></div>
+          <div class="chart-wrap"><canvas id="diabetes-chart"></canvas></div>
+          <div id="diabetes-risk-factors" class="insights hidden"></div>
+          <div class="chart-wrap"><canvas id="diabetes-importance-chart"></canvas></div>
+          <div id="diabetes-insights" class="insights hidden"></div>
+          <div id="diabetes-diet" class="plan hidden"></div>
+          <div id="diabetes-exercise" class="plan hidden"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div id="loading-overlay" class="loading hidden" aria-live="polite">
+    <div class="skeleton-card">
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-line"></div>
+      <div class="skeleton skeleton-line short"></div>
+      <div class="skeleton skeleton-chart"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
