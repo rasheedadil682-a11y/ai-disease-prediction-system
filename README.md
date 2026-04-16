@@ -1,5 +1,8 @@
 # 🧠 Nexus Predict – AI Disease Prediction System
 
+deployed link - https://astounding-pasca-8e79e8.netlify.app/
+
+
 A **full-stack AI-powered healthcare web app** that predicts **Heart Disease & Diabetes risk** using Machine Learning, enhanced with **advanced analytics, risk scoring, and AI-style explanations**.
 
 ---

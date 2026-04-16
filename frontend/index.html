@@ -30,21 +30,73 @@
     </div>
 
     <section id="heart-panel" class="panel active">
+      <article class="field-guide glass">
+        <h2>Before You Fill: Heart Terms Guide</h2>
+        <p class="guide-intro">Simple meanings and common adult ranges. Use your latest lab/test values if available.</p>
+        <div class="guide-grid">
+          <div class="guide-item"><h3>Age</h3><p>How old you are in years.</p><p><strong>Typical range:</strong> 18-100 years</p><p><strong>How to know:</strong> Self-reported from date of birth (no device).</p></div>
+          <div class="guide-item"><h3>Sex</h3><p>Biological sex used by this model.</p><p><strong>Options:</strong> Male or Female</p><p><strong>How to know:</strong> Self-reported clinical demographic detail.</p></div>
+          <div class="guide-item"><h3>What Is Angina?</h3><p>Angina means chest pain or pressure when the heart muscle does not get enough oxygen-rich blood, often during activity or stress.</p><p><strong>Important:</strong> New, severe, or lasting chest pain needs urgent medical care.</p><p><strong>How doctors assess:</strong> Symptom history, ECG, stress test, and sometimes angiography.</p></div>
+          <div class="guide-item"><h3>Chest Pain Type</h3><p>Kind of chest discomfort.</p><p><strong>Codes:</strong> TA = typical angina, ATA = atypical angina, NAP = non-anginal pain, ASY = no chest pain</p><ul><li><strong>TA:</strong> pressure/tightness with walking or stress, relieved by rest.</li><li><strong>ATA:</strong> pain not classic, may be sharp, brief, or in unusual area.</li><li><strong>NAP:</strong> chest pain likely from non-heart causes (muscle, acidity, etc.).</li><li><strong>ASY:</strong> no chest pain symptoms.</li></ul><p><strong>How to know:</strong> Best decided by doctor after symptom interview.</p></div>
+          <div class="guide-item"><h3>Resting BP</h3><p>Top blood pressure value while at rest.</p><p><strong>Typical normal:</strong> around 90-120 mmHg (systolic)</p><p><strong>Measured with:</strong> Digital BP monitor or manual sphygmomanometer + stethoscope.</p></div>
+          <div class="guide-item"><h3>Cholesterol</h3><p>Total cholesterol in blood.</p><p><strong>Desirable:</strong> below 200 mg/dL</p><p><strong>Measured with:</strong> Blood lipid profile test in lab (venous sample).</p></div>
+          <div class="guide-item"><h3>Fasting BS (0/1)</h3><p>Fasting blood sugar flag.</p><p><strong>Enter:</strong> 0 if 120 mg/dL or below, 1 if above 120 mg/dL</p><p><strong>Measured with:</strong> Glucometer (finger prick) or fasting plasma glucose lab test.</p></div>
+          <div class="guide-item"><h3>Resting ECG</h3><p>Heart's electrical pattern at rest.</p><p><strong>Options:</strong> Normal, ST (possible abnormality), LVH (possible heart muscle thickening)</p><p><strong>Measured with:</strong> 12-lead ECG machine.</p></div>
+          <div class="guide-item"><h3>Max Heart Rate</h3><p>Highest heart beats per minute reached during exertion.</p><p><strong>Common formula:</strong> roughly 220 - age</p><p><strong>Measured with:</strong> Treadmill stress test ECG or heart-rate monitor/smartwatch.</p></div>
+          <div class="guide-item"><h3>Exercise Angina</h3><p>Chest pain/discomfort during exercise.</p><p><strong>Options:</strong> Yes or No</p><p><strong>How to know:</strong> Symptom history during walking/exercise, often confirmed in stress testing.</p></div>
+          <div class="guide-item"><h3>Oldpeak</h3><p>ECG ST depression during stress test.</p><p><strong>Typical normal:</strong> close to 0 (higher values may indicate risk)</p><p><strong>Measured with:</strong> Exercise ECG/stress test report.</p></div>
+          <div class="guide-item"><h3>ST Slope</h3><p>Direction of ECG ST segment during exercise.</p><p><strong>Options:</strong> Up (often better), Flat or Down (can be concerning)</p><p><strong>Measured with:</strong> Interpreted by clinician from stress ECG tracing.</p></div>
+        </div>
+        <p class="guide-note">Note: These are general reference values for awareness, not a diagnosis.</p>
+      </article>
       <div class="app-grid">
         <article class="card glass">
           <h2>Heart Inputs</h2>
           <form id="heart-form" class="form-grid">
-            <input name="age" type="number" placeholder="Age" required />
-            <select name="sex" required><option value="">Sex</option><option value="M">Male</option><option value="F">Female</option></select>
-            <select name="chest_pain_type" required><option value="">Chest Pain Type</option><option value="ATA">ATA</option><option value="NAP">NAP</option><option value="ASY">ASY</option><option value="TA">TA</option></select>
-            <input name="resting_bp" type="number" placeholder="Resting BP" required />
-            <input name="cholesterol" type="number" placeholder="Cholesterol" required />
-            <input name="fasting_bs" type="number" placeholder="Fasting BS (0/1)" min="0" max="1" required />
-            <select name="resting_ecg" required><option value="">Resting ECG</option><option value="Normal">Normal</option><option value="ST">ST</option><option value="LVH">LVH</option></select>
-            <input name="maxhr" type="number" placeholder="Max Heart Rate" required />
-            <select name="exercise_angina" required><option value="">Exercise Angina</option><option value="Y">Yes</option><option value="N">No</option></select>
-            <input name="oldpeak" type="number" step="0.1" placeholder="Oldpeak" required />
-            <select name="st_slope" required><option value="">ST Slope</option><option value="Up">Up</option><option value="Flat">Flat</option><option value="Down">Down</option></select>
+            <label class="form-field">
+              <span class="field-title">Age</span>
+              <input name="age" type="number" placeholder="Age" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">Sex</span>
+              <select name="sex" required><option value="">Select</option><option value="M">Male</option><option value="F">Female</option></select>
+            </label>
+            <label class="form-field">
+              <span class="field-title">Chest Pain Type</span>
+              <select name="chest_pain_type" required><option value="">Select</option><option value="ATA">ATA</option><option value="NAP">NAP</option><option value="ASY">ASY</option><option value="TA">TA</option></select>
+            </label>
+            <label class="form-field">
+              <span class="field-title">Resting BP</span>
+              <input name="resting_bp" type="number" placeholder="Resting BP" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">Cholesterol</span>
+              <input name="cholesterol" type="number" placeholder="Cholesterol" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">Fasting BS (0/1)</span>
+              <input name="fasting_bs" type="number" placeholder="Fasting BS (0/1)" min="0" max="1" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">Resting ECG</span>
+              <select name="resting_ecg" required><option value="">Select</option><option value="Normal">Normal</option><option value="ST">ST</option><option value="LVH">LVH</option></select>
+            </label>
+            <label class="form-field">
+              <span class="field-title">Max Heart Rate</span>
+              <input name="maxhr" type="number" placeholder="Max Heart Rate" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">Exercise Angina</span>
+              <select name="exercise_angina" required><option value="">Select</option><option value="Y">Yes</option><option value="N">No</option></select>
+            </label>
+            <label class="form-field">
+              <span class="field-title">Oldpeak</span>
+              <input name="oldpeak" type="number" step="0.1" placeholder="Oldpeak" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">ST Slope</span>
+              <select name="st_slope" required><option value="">Select</option><option value="Up">Up</option><option value="Flat">Flat</option><option value="Down">Down</option></select>
+            </label>
             <button class="submit-btn" type="submit">Predict Heart Risk</button>
           </form>
         </article>
@@ -64,18 +116,57 @@
     </section>
 
     <section id="diabetes-panel" class="panel">
+      <article class="field-guide glass">
+        <h2>Before You Fill: Diabetes Terms Guide</h2>
+        <p class="guide-intro">Simple meanings and common adult ranges. Enter your recent medical values when possible.</p>
+        <div class="guide-grid">
+          <div class="guide-item"><h3>Pregnancies</h3><p>Number of times pregnant.</p><p><strong>Typical range:</strong> 0 and above</p><p><strong>How to know:</strong> Personal medical history (no device).</p></div>
+          <div class="guide-item"><h3>Glucose</h3><p>Blood sugar level (usually fasting).</p><p><strong>Typical fasting normal:</strong> about 70-99 mg/dL</p><p><strong>Measured with:</strong> Glucometer or fasting plasma glucose blood test.</p></div>
+          <div class="guide-item"><h3>Blood Pressure (BP)</h3><p>Bottom blood pressure value (diastolic).</p><p><strong>Typical normal:</strong> about 60-80 mmHg</p><p><strong>Measured with:</strong> BP monitor (digital/manual cuff).</p></div>
+          <div class="guide-item"><h3>Skin Thickness</h3><p>Triceps skinfold thickness, related to body fat estimate.</p><p><strong>Common dataset range:</strong> around 10-50 mm</p><p><strong>Measured with:</strong> Skinfold caliper by trained health worker.</p></div>
+          <div class="guide-item"><h3>Insulin</h3><p>Blood insulin concentration.</p><p><strong>Typical fasting reference:</strong> around 2-25 mu U/mL (lab-dependent)</p><p><strong>Measured with:</strong> Fasting insulin blood test in lab.</p></div>
+          <div class="guide-item"><h3>BMI</h3><p>Body Mass Index from height and weight.</p><p><strong>Healthy range:</strong> about 18.5-24.9</p><p><strong>Measured with:</strong> Weighing scale + stadiometer (height meter), then BMI formula.</p></div>
+          <div class="guide-item"><h3>Diabetes Pedigree Function (DPF)</h3><p>Score representing family-history effect on diabetes risk.</p><p><strong>Range:</strong> non-negative; higher means stronger inherited tendency</p><p><strong>How to know:</strong> Computed by model from dataset; not directly measured by a device.</p></div>
+          <div class="guide-item"><h3>Age</h3><p>Your age in years.</p><p><strong>Typical range:</strong> 18-100 years</p><p><strong>How to know:</strong> Self-reported from date of birth.</p></div>
+        </div>
+        <p class="guide-note">Note: Ranges are educational and may vary by lab, age, and personal condition.</p>
+      </article>
       <div class="app-grid">
         <article class="card glass">
           <h2>Diabetes Inputs</h2>
           <form id="diabetes-form" class="form-grid">
-            <input name="pregnancies" type="number" placeholder="Pregnancies" required />
-            <input name="glucose" type="number" placeholder="Glucose" required />
-            <input name="bp" type="number" placeholder="Blood Pressure" required />
-            <input name="skin_thickness" type="number" placeholder="Skin Thickness" required />
-            <input name="insulin" type="number" placeholder="Insulin" required />
-            <input name="bmi" type="number" step="0.1" placeholder="BMI" required />
-            <input name="dpf" type="number" step="0.001" placeholder="Diabetes Pedigree Function" required />
-            <input name="age" type="number" placeholder="Age" required />
+            <label class="form-field">
+              <span class="field-title">Pregnancies</span>
+              <input name="pregnancies" type="number" placeholder="Pregnancies" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">Glucose</span>
+              <input name="glucose" type="number" placeholder="Glucose" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">Blood Pressure</span>
+              <input name="bp" type="number" placeholder="Blood Pressure" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">Skin Thickness</span>
+              <input name="skin_thickness" type="number" placeholder="Skin Thickness" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">Insulin</span>
+              <input name="insulin" type="number" placeholder="Insulin" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">BMI</span>
+              <input name="bmi" type="number" step="0.1" placeholder="BMI" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">Diabetes Pedigree Function</span>
+              <input name="dpf" type="number" step="0.001" placeholder="Diabetes Pedigree Function" required />
+            </label>
+            <label class="form-field">
+              <span class="field-title">Age</span>
+              <input name="age" type="number" placeholder="Age" required />
+            </label>
             <button class="submit-btn" type="submit">Predict Diabetes Risk</button>
           </form>
         </article>
