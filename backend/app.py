@@ -109,6 +109,25 @@ def _prediction_label(raw) -> str:
     raise ValueError(f"Unexpected class label: {v!r} (expected 0 or 1)")
 
 
+def _positive_class_probability(model, x_sc) -> float | None:
+    if not hasattr(model, "predict_proba"):
+        return None
+    try:
+        proba = model.predict_proba(x_sc)[0]
+    except Exception:
+        logger.exception("Probability estimation failed")
+        return None
+
+    classes = list(getattr(model, "classes_", []))
+    if 1 in classes:
+        index = classes.index(1)
+    elif len(proba) == 2:
+        index = 1
+    else:
+        index = int(np.argmax(proba))
+    return float(proba[index])
+
+
 def _strip_routing_keys(data: dict) -> dict:
     return {k: v for k, v in data.items() if k not in ROUTING_KEYS}
 
@@ -320,6 +339,7 @@ def _predict_heart_body(payload: dict | None):
             x_sc = heart_scaler.transform(x)
         logger.info("Heart scaled vector (first 6): %s", [round(float(v), 5) for v in x_sc[0, :6]])
         pred = heart_model.predict(x_sc)[0]
+        probability = _positive_class_probability(heart_model, x_sc)
     except Exception as exc:
         logger.exception("Heart prediction failed")
         return jsonify({"error": "Prediction failed.", "detail": str(exc), "ok": False}), 500
@@ -330,7 +350,10 @@ def _predict_heart_body(payload: dict | None):
         return jsonify({"error": str(exc), "ok": False}), 500
 
     logger.info("Heart prediction OK: class=%s label=%s", pred, result)
-    return jsonify({"ok": True, "model": "heart", "result": result})
+    response = {"ok": True, "model": "heart", "result": result}
+    if probability is not None:
+        response["probability"] = round(probability, 4)
+    return jsonify(response)
 
 
 def _predict_diabetes_body(payload: dict | None):
@@ -391,6 +414,7 @@ def _predict_diabetes_body(payload: dict | None):
             x_sc = diabetes_scaler.transform(x)
         logger.info("Diabetes scaled vector (first 4): %s", [round(float(v), 5) for v in x_sc[0, :4]])
         pred = diabetes_model.predict(x_sc)[0]
+        probability = _positive_class_probability(diabetes_model, x_sc)
     except Exception as exc:
         logger.exception("Diabetes prediction failed")
         return jsonify({"error": "Prediction failed.", "detail": str(exc), "ok": False}), 500
@@ -399,13 +423,12 @@ def _predict_diabetes_body(payload: dict | None):
         result = _prediction_label(pred)
     except ValueError as exc:
         return jsonify({"error": str(exc), "ok": False}), 500
-    try:
-        result = _prediction_label(pred)
-    except ValueError as exc:
-        return jsonify({"error": str(exc), "ok": False}), 500
 
     logger.info("Diabetes prediction OK: class=%s label=%s", pred, result)
-    return jsonify({"ok": True, "model": "diabetes", "result": result})
+    response = {"ok": True, "model": "diabetes", "result": result}
+    if probability is not None:
+        response["probability"] = round(probability, 4)
+    return jsonify(response)
 
 
 @app.route("/predict", methods=["POST"])
