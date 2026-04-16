@@ -110,13 +110,17 @@
   }
 
   function resolveRiskPercent(model, payload, apiResult) {
-    if (typeof apiResult.probability === "number") {
-      return Math.max(1, Math.min(99, Math.round(apiResult.probability * 100)));
+    const probability = typeof apiResult.probability === "number" ? apiResult.probability : null;
+    const isHigh = String(apiResult.result || "").toLowerCase().includes("high");
+
+    if (probability !== null) {
+      const percent = Math.round((isHigh ? probability : 1 - probability) * 100);
+      return Math.max(1, Math.min(99, percent));
     }
+
     const weighted = weightedRiskScore(model, payload);
-    const highFromModel = String(apiResult.result || "").toLowerCase().includes("high");
-    if (highFromModel) return Math.max(55, weighted);
-    return Math.min(45, 100 - weighted);
+    if (isHigh) return Math.max(70, weighted);
+    return Math.min(30, Math.max(1, 100 - weighted));
   }
 
   function riskLevel(percent) {
